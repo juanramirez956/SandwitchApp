@@ -6,20 +6,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 
 public class MainActivity extends ActionBarActivity {
     private Button btnPlcOrdr;
+    private CheckBox chk1,chk2,chk3,chk4,chk5,chk6,chk7;
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
+    private int selectedId;
+
     public final String  parameter = "VALUE";
     final Context context = this;
 
@@ -39,29 +42,20 @@ public class MainActivity extends ActionBarActivity {
                         .setCancelable(false)
                         .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                CheckBox chk1 = (CheckBox) findViewById(R.id.chkBacon);
-                                CheckBox chk2 = (CheckBox) findViewById(R.id.chkCheese);
-                                CheckBox chk3 = (CheckBox) findViewById(R.id.chkLettuce);
-                                CheckBox chk4 = (CheckBox) findViewById(R.id.chkOnion);
-                                CheckBox chk5 = (CheckBox) findViewById(R.id.chkPepperoni);
-                                CheckBox chk6 = (CheckBox) findViewById(R.id.chkTomato);
-                                CheckBox chk7 = (CheckBox) findViewById(R.id.chkTurkey);
-
-                                RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rgpBreadOptions);
-                                int selectedId = radioGroup.getCheckedRadioButtonId();
-                                RadioButton radioButton = (RadioButton) findViewById(selectedId);
+                                prepareSandwitchOptions();
+                                Sandwitch sandwitch1 = new Sandwitch(
+                                        radioButton.getText().toString(),
+                                        chk1.getText().toString(),
+                                        chk2.getText().toString(),
+                                        chk3.getText().toString(),
+                                        chk4.getText().toString(),
+                                        chk5.getText().toString(),
+                                        chk6.getText().toString());
 
                                 Intent intent = new Intent(getBaseContext(), MainActivity2.class);
-                                int k =0;
-                                intent.putExtra(parameter + k++, chk1.getText().toString());
-                                intent.putExtra(parameter + k++, chk2.getText().toString());
-                                intent.putExtra(parameter + k++, chk3.getText().toString());
-                                intent.putExtra(parameter + k++, chk4.getText().toString());
-                                intent.putExtra(parameter + k++, chk5.getText().toString());
-                                intent.putExtra(parameter + k++, chk6.getText().toString());
-                                intent.putExtra(parameter + k++, chk7.getText().toString());
-                                intent.putExtra(parameter + k++, radioButton.getText().toString());
+                                intent.putExtra("Sandwitch",sandwitch1 );
                                 startActivity(intent);
+
                             }
                         })
                         .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -77,6 +71,19 @@ public class MainActivity extends ActionBarActivity {
                 alertDialog.show();
             }
         });
+    }
+
+    private void prepareSandwitchOptions() {
+        chk1 = (CheckBox) findViewById(R.id.chkBacon);
+        chk2 = (CheckBox) findViewById(R.id.chkCheese);
+        chk3 = (CheckBox) findViewById(R.id.chkLettuce);
+        chk4 = (CheckBox) findViewById(R.id.chkOnion);
+        chk5 = (CheckBox) findViewById(R.id.chkPepperoni);
+        chk6 = (CheckBox) findViewById(R.id.chkTomato);
+        chk7 = (CheckBox) findViewById(R.id.chkTurkey);
+        radioGroup = (RadioGroup) findViewById(R.id.rgpBreadOptions);
+        selectedId = radioGroup.getCheckedRadioButtonId();
+        radioButton = (RadioButton) findViewById(selectedId);
     }
 
 
