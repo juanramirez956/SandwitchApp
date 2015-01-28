@@ -24,5 +24,10 @@
     <string name="title_activity_main_activity2">OrderPlaced</string>
     <string name="sucessfully">Order placed sucessfully!</string>
     <string name="summary">your sandwitch summary is:</string>
+    <string name="title_activity_counter_selection">CounterSelection</string>
+    <string name="counterlabel">choose, how much sandwitch do you want</string>
+    <string name="Continue">Continue</string>
+    <string name="next">Next Sandwitch</string>
+    <string name="title_activity_sandwitch2">Sandwitch 2</string>
 
 </resources>

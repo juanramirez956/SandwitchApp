@@ -1,13 +1,14 @@
 package com.example.user.sandwiches;
 
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 
 public class MainActivity2 extends ActionBarActivity {
     private TextView results;
@@ -16,19 +17,24 @@ public class MainActivity2 extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity2);
+
         results = (TextView)findViewById((R.id.lblsummaryuser));
-        Intent intent = getIntent();
-        String res = "";
-        String temp = "";
-        for(int i =0; i<10;i++)
-        {
-            temp = intent.getStringExtra("VALUE"+i);
-            if(temp!=null) {
-                res = res + intent.getStringExtra("VALUE" + i);
-                res = res + ',';
-            }
-        }
-        results.setText(res);
+        Sandwitch sandwitch1 = getIntent().getParcelableExtra("Sandwitch");
+        Log.d("sandwitch","afdadsfsadfasdfas");
+        results.setText(PrepareMenuSummary(sandwitch1));
+    }
+
+    public String PrepareMenuSummary(Sandwitch sandwitch)
+    {
+        String sandwitchString = "";
+        sandwitchString = sandwitch.getBread();
+        sandwitchString = sandwitchString +","+ sandwitch.getBacon();
+        sandwitchString = sandwitchString +","+ sandwitch.getCheese();
+        sandwitchString = sandwitchString +","+ sandwitch.getOnion();
+        sandwitchString = sandwitchString +","+ sandwitch.getKetchup();
+        sandwitchString = sandwitchString +","+ sandwitch.getLettuce();
+        sandwitchString = sandwitchString +","+ sandwitch.getPeperoni();
+       return  sandwitchString;
     }
 
 
